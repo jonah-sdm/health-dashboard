@@ -380,14 +380,34 @@ input { font-family: inherit; }
   .app { grid-template-columns: 1fr; }
   .sidebar {
     position: fixed; bottom: 0; top: auto; height: auto; width: 100%;
-    flex-direction: row; padding: 8px; border-right: none; border-top: 1px solid var(--border);
+    flex-direction: row; padding: 6px 4px; border-right: none; border-top: 1px solid var(--border);
     z-index: 50; overflow-x: auto; gap: 2px;
+    padding-bottom: calc(6px + env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
   }
+  .sidebar::-webkit-scrollbar { display: none; }
   .brand, .nav-group-label, .nav-spacer, .nav-foot, .nav-badge { display: none; }
-  .nav-item { flex-direction: column; gap: 4px; font-size: 10px; padding: 8px 10px; white-space: nowrap; min-width: 64px; }
+  .nav-item { flex-direction: column; gap: 3px; font-size: 9.5px; padding: 7px 9px; white-space: nowrap; min-width: 58px; border-radius: var(--radius-sm); }
   .nav-item svg { width: 20px; height: 20px; }
-  .content { padding: 18px 16px 90px; }
-  .topbar { padding: 14px 16px; }
+  .content { padding: 16px 14px 96px; }
+  .topbar { padding: 12px 16px; gap: 12px; }
+  .topbar .btn { padding: 8px 12px; }
+  .page-title { font-size: 20px; white-space: normal; line-height: 1.1; }
+  .page-sub { display: none; }
+  .search { display: none !important; }
+  .card-pad { padding: 16px; }
+  .summary { padding: 20px 18px; }
+  .stat-row { gap: 8px; }
+  .statlet { padding: 11px 12px; }
+  .statlet .v { font-size: 24px; }
+  .modal { width: 100%; max-width: 100%; border-radius: 18px 18px 0 0; }
+  .modal-backdrop { align-items: flex-end; }
+}
+@media (max-width: 480px) {
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .supp-summary { grid-template-columns: 1fr 1fr; }
+  .live-grid { grid-template-columns: 1fr 1fr; }
+  .summary .big { font-size: clamp(44px, 16vw, 60px); }
 }
 
   </style>
@@ -680,7 +700,8 @@ input { font-family: inherit; }
 .dropzone {
   border: 2px dashed var(--border-strong); border-radius: var(--radius-lg);
   padding: 40px 24px; text-align: center; background: var(--surface-2);
-  transition: all .2s; cursor: pointer;
+  transition: border-color .2s, background .2s; cursor: pointer;
+  transform: translateZ(0); backface-visibility: hidden;
 }
 .dropzone:hover { border-color: var(--accent); background: var(--accent-soft); }
 .dropzone .di { width: 50px; height: 50px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); color: var(--accent); display: grid; place-items: center; margin: 0 auto 16px; }
@@ -2891,86 +2912,98 @@ Object.assign(window, { Genetics, GeneRow });
 /* ============================================================
    Vitals — Supplement Protocol page
    ============================================================ */
-function Supplements({ today, overrides, setOverride, linkOf, nav }) {
-  const base = window.VITALS.supplements;
-  const supps = base.map(s => ({ ...s, ...(overrides[s.id] || {}) }));
-  const [restock, setRestock] = React.useState(null);
-  const [view, setView] = React.useState("track"); // track | schedule
-
-  const computed = supps.map(s => ({ s, d: daysRemaining(s, today) })).sort((a, b) => a.d.days - b.d.days);
-  const lowCount = computed.filter(x => x.d.days <= x.s.reorderThresholdDays).length;
-  const soonest = computed[0];
+function Supplements({ linkOf }) {
+  const supps = window.VITALS.supplements;
+  const amCount = supps.filter(s => s.amDose > 0).length;
+  const pmCount = supps.filter(s => s.pmDose > 0).length;
+  const totalDaily = supps.reduce((a, s) => a + s.amDose + s.pmDose, 0);
+  const dailyLabel = Number.isInteger(totalDaily) ? totalDaily : totalDaily.toFixed(1);
 
   return (
     <div className="content stagger">
-      {/* summary stats */}
+      {/* protocol summary */}
       <div className="supp-summary">
-        <SummaryStat label="Items tracked" value={supps.length} sub="in your protocol" />
-        <SummaryStat label="Running low" value={lowCount} sub={`within reorder window`} tone={lowCount ? "watch" : "ok"} />
-        <SummaryStat label="Next to run out" value={soonest.d.days + "d"} sub={soonest.s.name} tone={depState(soonest.d.days, soonest.s.reorderThresholdDays)} />
-        <SummaryStat label="Daily intake" value={supps.reduce((a, s) => a + s.amDose + s.pmDose, 0).toFixed(1)} sub="doses across AM + PM" />
+        <SummaryStat label="Supplements" value={supps.length} sub="in your protocol" />
+        <SummaryStat label="Morning" value={amCount} sub="taken in the AM" />
+        <SummaryStat label="Evening" value={pmCount} sub="taken in the PM" />
+        <SummaryStat label="Daily intake" value={dailyLabel} sub="doses across the day" />
       </div>
 
-      <div className="row" style={{ justifyContent: "space-between", marginBottom: 16, alignItems: "center" }}>
-        <div className="row gap6">
-          {[["track", "Depletion tracker"], ["schedule", "Daily schedule"]].map(([k, l]) =>
-            <button key={k} className={"chip" + (view === k ? " active" : "")} onClick={() => setView(k)}>{l}</button>)}
+      {/* daily schedule (quick reference) */}
+      <div className="card" style={{ overflow: "hidden", marginBottom: 22 }}>
+        <div className="card-pad" style={{ paddingBottom: 6 }}>
+          <div className="eyebrow">Daily schedule</div>
+          <div className="card-title" style={{ fontSize: 16, marginTop: 4 }}>Morning &amp; evening doses</div>
         </div>
-        <div className="muted3" style={{ fontSize: 12 }}>Sorted by days remaining · soonest first</div>
+        <table className="sched">
+          <thead>
+            <tr><th>Supplement</th><th>Brand</th><th className="dose">AM</th><th className="dose">PM</th><th>Unit</th></tr>
+          </thead>
+          <tbody>
+            {supps.map(s => (
+              <tr key={s.id}>
+                <td><div className="sname">{s.name}</div></td>
+                <td><span className="sbrand">{s.brand}</span></td>
+                <td className="dose"><span className={"dosecell" + (s.amDose ? "" : " zero")}>{s.amDose || "—"}</span></td>
+                <td className="dose"><span className={"dosecell" + (s.pmDose ? "" : " zero")}>{s.pmDose || "—"}</span></td>
+                <td><span className="muted" style={{ fontSize: 12.5 }}>{unitLong(s.unit)}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      {view === "track" ? (
-        <div className="supp-grid">
-          {computed.map(({ s, d }) => {
-            const state = depState(d.days, s.reorderThresholdDays);
-            const color = state === "high" ? "var(--high)" : state === "watch" ? "var(--watch)" : "var(--ok)";
-            return (
-              <div className="card supp-card" key={s.id}>
-                <div className={"edge " + state} />
-                <div className="topline">
-                  <div style={{ minWidth: 0 }}>
-                    <div className="supp-name">{s.name}</div>
-                    <div className="supp-brand">{s.brand}</div>
-                  </div>
-                  <div className="supp-days">
-                    <div className="n" style={{ color }}>{d.days <= 0 ? "0" : d.days}</div>
-                    <div className="lbl">{d.days === 1 ? "day left" : "days left"}</div>
-                  </div>
+      {/* the full protocol — detailed cards */}
+      <div className="eyebrow" style={{ marginBottom: 10 }}>The protocol</div>
+      <div className="supp-grid" style={{ marginBottom: 22 }}>
+        {supps.map(s => {
+          const url = linkOf ? linkOf(s.id) : "";
+          const daily = s.amDose + s.pmDose;
+          return (
+            <div className="card card-pad" key={s.id}>
+              <div className="row" style={{ justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
+                <div style={{ minWidth: 0 }}>
+                  <div className="supp-name">{s.name}</div>
+                  <div className="supp-brand">{s.brand}</div>
                 </div>
-                <div className="supp-note">{s.notes}</div>
-
-                <div style={{ marginTop: 16 }}>
-                  <div className="row" style={{ justifyContent: "space-between", marginBottom: 6 }}>
-                    <span className="muted3" style={{ fontSize: 11.5 }}>{Math.round(d.liveQty)} of {s.unitsPerContainer} {unitShort(s.unit, 2)} left</span>
-                    <span className="muted3" style={{ fontSize: 11.5, fontFamily: "var(--font-mono)" }}>{Math.round(d.pct * 100)}%</span>
-                  </div>
-                  <div className="bar"><i style={{ width: (d.pct * 100) + "%", background: color }} /></div>
-                </div>
-
-                <div className="supp-meta">
-                  <span><Icon name="clock" size={13} style={{ verticalAlign: "-2px", marginRight: 4, color: "var(--text-3)" }} />Runs out <b>{window.VITALS.fmtDate(d.runOut, { month: "short", day: "numeric" })}</b></span>
-                  <span><Icon name="refresh" size={13} style={{ verticalAlign: "-2px", marginRight: 4, color: "var(--text-3)" }} />{d.daily} / day</span>
-                </div>
-
-                <div className="supp-foot">
-                  <div className="dose-pills">
-                    {s.amDose > 0 && <span className="dose-pill">AM {s.amDose}</span>}
-                    {s.pmDose > 0 && <span className="dose-pill">PM {s.pmDose}</span>}
-                  </div>
-                  <button className={"btn btn-sm" + (state !== "ok" ? " btn-primary" : "")} onClick={() => setRestock(s)}>
-                    <Icon name="refresh" size={14} /> Restock
-                  </button>
+                <div className="dose-pills">
+                  {s.amDose > 0 && <span className="dose-pill">AM {s.amDose}</span>}
+                  {s.pmDose > 0 && <span className="dose-pill">PM {s.pmDose}</span>}
                 </div>
               </div>
-            );
-          })}
-        </div>
-      ) : (
-        <ScheduleView supps={supps} />
-      )}
+              {s.notes && <div className="supp-note" style={{ marginTop: 10 }}>{s.notes}</div>}
+              <div className="supp-meta" style={{ marginTop: 14 }}>
+                <span><Icon name="refresh" size={13} style={{ verticalAlign: "-2px", marginRight: 4, color: "var(--text-3)" }} />{daily} {unitShort(s.unit, 2)} / day</span>
+                {url
+                  ? <a className="conn-chip" href={url} target="_blank" rel="noopener" style={{ textDecoration: "none" }}><Icon name="external" size={12} /> Reorder</a>
+                  : null}
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
-      {restock && <RestockModal s={restock} today={today} reorderUrl={linkOf ? linkOf(restock.id) : ""} nav={nav} onClose={() => setRestock(null)}
-        onSave={(qty, date) => { setOverride(restock.id, { currentQuantity: qty, lastRestockedDate: date }); setRestock(null); }} />}
+      {/* habits + lifestyle */}
+      <div className="ov-grid">
+        <div className="card card-pad">
+          <div className="eyebrow" style={{ marginBottom: 14 }}>Daily habits</div>
+          <div className="habit-strip" style={{ gridTemplateColumns: "1fr 1fr" }}>
+            {window.VITALS.habits.map(h => (
+              <div className="habit" key={h.id}>
+                <div className="hi"><Icon name={h.icon} size={17} /></div>
+                <div><div className="hn">{h.name}</div><div className="hd">{h.detail}</div></div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="card card-pad">
+          <div className="eyebrow" style={{ marginBottom: 12 }}>Lifestyle protocol</div>
+          <div className="col gap12">
+            <LifeRow icon="sun" title="Morning sunlight" body="10–15 minutes within an hour of waking to anchor circadian rhythm and support cortisol's natural curve." />
+            <LifeRow icon="moon" title="Evening wind-down" body="Screens off 60 minutes before bed; magnesium glycinate + Cortisol Manager taken PM to ease into sleep." />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -3244,14 +3277,10 @@ function Trends({ accent, nav }) {
 function Records({ nav }) {
   const panels = window.VITALS.panels;
   const [drag, setDrag] = React.useState(false);
-  const [showUpload, setShowUpload] = React.useState(false);
   const [added, setAdded] = React.useState(null);
+  const pick = f => setAdded(f ? f.name : null);
   return (
     <div className="content stagger">
-      {showUpload && <UploadModal title="Add a lab panel"
-        desc="Drop a lab PDF, photo, or CSV. In v2, OCR import reads the values automatically; for now it files the document against a new panel."
-        accept=".pdf,.csv,.png,.jpg,.jpeg" note="Lab PDF · photo · CSV export"
-        onClose={() => setShowUpload(false)} onUpload={(f) => { setShowUpload(false); setAdded(f); }} />}
       <div className="ov-grid" style={{ gridTemplateColumns: "1.5fr 1fr", alignItems: "start" }}>
         <div className="card" style={{ overflow: "hidden" }}>
           <div className="card-pad" style={{ paddingBottom: 8 }}>
@@ -3280,18 +3309,36 @@ function Records({ nav }) {
 
         <div className="col gap20">
           <div className="card card-pad">
-            <div className="eyebrow" style={{ marginBottom: 14 }}>Add a panel</div>
-            {added && <div className="reorder warn" style={{ marginBottom: 12 }}><Icon name="doc" size={16} /><div style={{ minWidth: 0 }}><div style={{ fontWeight: 600, fontSize: 13 }}>{added}</div><div className="muted3" style={{ fontSize: 11.5 }}>Queued · OCR import lands in v2</div></div></div>}
-            <label className={"dropzone" + (drag ? " drag" : "")}
-              onDragOver={e => { e.preventDefault(); setDrag(true); }}
-              onDragLeave={() => setDrag(false)}
-              onDrop={e => { e.preventDefault(); setDrag(false); const f = e.dataTransfer.files[0]; setAdded(f ? f.name : "panel.pdf"); }}>
-              <div className="di"><Icon name="upload" size={24} /></div>
-              <div style={{ fontWeight: 600, fontSize: 14 }}>Drop a lab PDF or image</div>
-              <div className="muted3" style={{ fontSize: 12, marginTop: 4 }}>or click to browse · OCR import lands in v2</div>
-              <input type="file" hidden accept=".pdf,.csv,.png,.jpg,.jpeg" onChange={e => { const f = e.target.files[0]; setAdded(f ? f.name : "panel.pdf"); }} />
-            </label>
-            <button className="btn" style={{ width: "100%", marginTop: 12, justifyContent: "center" }} onClick={() => setShowUpload(true)}><Icon name="upload" size={15} /> Upload a document</button>
+            <div className="eyebrow" style={{ marginBottom: 6 }}>Add a panel</div>
+            <div className="muted3" style={{ fontSize: 12, marginBottom: 14, lineHeight: 1.5 }}>
+              Save a lab report to your records. Automatic value reading (OCR) isn't built yet, so the file is filed for reference — the numbers are entered to build the panel.
+            </div>
+
+            {added ? (
+              <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-sm)", background: "var(--surface-2)", padding: 14 }}>
+                <div className="row gap10" style={{ alignItems: "flex-start" }}>
+                  <Icon name="doc" size={18} style={{ color: "var(--accent)", flex: "none", marginTop: 1 }} />
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontWeight: 600, fontSize: 13.5, wordBreak: "break-word" }}>{added}</div>
+                    <div className="muted3" style={{ fontSize: 11.5, marginTop: 2 }}>Filed to records · values not yet read</div>
+                  </div>
+                </div>
+                <div className="row gap8" style={{ marginTop: 14, alignItems: "center" }}>
+                  <span className="badge badge-ok"><Icon name="check" size={12} /> Filed</span>
+                  <button className="btn btn-sm btn-ghost" style={{ marginLeft: "auto" }} onClick={() => setAdded(null)}>Remove</button>
+                </div>
+              </div>
+            ) : (
+              <label className={"dropzone" + (drag ? " drag" : "")}
+                onDragOver={e => { e.preventDefault(); setDrag(true); }}
+                onDragLeave={() => setDrag(false)}
+                onDrop={e => { e.preventDefault(); setDrag(false); pick(e.dataTransfer.files[0]); }}>
+                <div className="di"><Icon name="upload" size={24} /></div>
+                <div style={{ fontWeight: 600, fontSize: 14 }}>Drop a lab PDF or image</div>
+                <div className="muted3" style={{ fontSize: 12, marginTop: 4 }}>or click to browse</div>
+                <input type="file" hidden accept=".pdf,.csv,.png,.jpg,.jpeg" onChange={e => pick(e.target.files[0])} />
+              </label>
+            )}
           </div>
 
           <div className="card card-pad">
