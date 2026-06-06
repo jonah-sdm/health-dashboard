@@ -1,0 +1,728 @@
+{
+  "panels": [
+    {
+      "id": "panel-2026-05-25",
+      "collectionDate": "2026-05-25",
+      "reportDate": "2026-05-27",
+      "labName": "Dynacare",
+      "fasting": true,
+      "_note": "Representative seed values — replace with the actual Dynacare panel. Explainer text is authored, plain-language reference content (not medical advice).",
+      "markers": [
+        {
+          "id": "tsh",
+          "name": "Thyroid Stimulating Hormone (TSH)",
+          "group": "Thyroid & Autoimmune",
+          "value": 1.8,
+          "unit": "mIU/L",
+          "refLow": 0.32,
+          "refHigh": 4.0,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The pituitary's signal telling your thyroid how hard to work.",
+            "whyItMatters": "It's the master dial for energy, metabolism, temperature and mood. High TSH usually means an underactive thyroid; low means overactive.",
+            "whatYoursSuggests": "Comfortably mid-range — the pituitary isn't straining to push the thyroid, which is reassuring."
+          },
+          "labNote": null
+        },
+        {
+          "id": "free-t4",
+          "name": "Free T4",
+          "group": "Thyroid & Autoimmune",
+          "value": 15,
+          "unit": "pmol/L",
+          "refLow": 10.5,
+          "refHigh": 20,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The 'storage' thyroid hormone circulating freely, ready to be converted to the active form.",
+            "whyItMatters": "It's the reservoir your body draws on. Low levels can mean sluggish thyroid output.",
+            "whatYoursSuggests": "Solidly in range — adequate hormone available to convert as needed."
+          },
+          "labNote": null
+        },
+        {
+          "id": "free-t3",
+          "name": "Free T3",
+          "group": "Thyroid & Autoimmune",
+          "value": 4.6,
+          "unit": "pmol/L",
+          "refLow": 3.5,
+          "refHigh": 6.5,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The active thyroid hormone — the one that actually does the work in your cells.",
+            "whyItMatters": "This is what drives day-to-day energy and metabolism. It reflects how well you convert T4 into the usable form.",
+            "whatYoursSuggests": "Healthy mid-range conversion — your cells are getting the active hormone they need."
+          },
+          "labNote": null
+        },
+        {
+          "id": "reverse-t3",
+          "name": "Reverse T3",
+          "group": "Thyroid & Autoimmune",
+          "value": 24,
+          "unit": "ng/dL",
+          "refLow": 8,
+          "refHigh": 25,
+          "status": "BORDERLINE",
+          "severityRank": 40,
+          "explainer": {
+            "whatItIs": "An inactive 'brake-pedal' version of thyroid hormone the body makes, often more under stress.",
+            "whyItMatters": "When it climbs, it can blunt the effect of the active hormone even if other numbers look fine — a common stress/inflammation signal.",
+            "whatYoursSuggests": "Sitting at the top of the range. Not alarming, but worth watching alongside stress and the active T3 number. One to track at the next draw."
+          },
+          "labNote": null
+        },
+        {
+          "id": "tpo-ab",
+          "name": "Thyroid Peroxidase Antibody (TPO)",
+          "group": "Thyroid & Autoimmune",
+          "value": 78,
+          "unit": "IU/mL",
+          "refLow": null,
+          "refHigh": 35,
+          "status": "HIGH",
+          "severityRank": 80,
+          "explainer": {
+            "whatItIs": "An antibody that targets an enzyme inside the thyroid gland.",
+            "whyItMatters": "Elevated TPO is the classic marker of autoimmune thyroid activity (Hashimoto's pattern) — the immune system nudging the thyroid. It doesn't necessarily mean symptoms today, but it explains why thyroid support is on the protocol.",
+            "whatYoursSuggests": "Above the reference cutoff, consistent with an autoimmune thyroid picture. The current thyroid hormone numbers are still healthy, so this is about monitoring the trend rather than a crisis. Worth discussing with your doctor."
+          },
+          "labNote": "Elevated anti-TPO antibodies are associated with autoimmune thyroid disease. Clinical correlation recommended."
+        },
+        {
+          "id": "tg-ab",
+          "name": "Thyroglobulin Antibody",
+          "group": "Thyroid & Autoimmune",
+          "value": 38,
+          "unit": "IU/mL",
+          "refLow": null,
+          "refHigh": 4.0,
+          "status": "HIGH",
+          "severityRank": 75,
+          "explainer": {
+            "whatItIs": "A second thyroid antibody, this one against thyroglobulin, a protein the gland uses to make hormone.",
+            "whyItMatters": "Alongside TPO, it reinforces the autoimmune thyroid pattern. Two positive antibodies is a clearer signal than one.",
+            "whatYoursSuggests": "Elevated, mirroring the TPO result — together they paint a consistent autoimmune-thyroid story. Track over time; the support protocol (selenium, vitamin D) targets exactly this."
+          },
+          "labNote": null
+        },
+        {
+          "id": "glucose-fasting",
+          "name": "Glucose (Fasting)",
+          "group": "Metabolic & Blood Sugar",
+          "value": 5.1,
+          "unit": "mmol/L",
+          "refLow": 3.6,
+          "refHigh": 6.0,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "Blood sugar after an overnight fast — a snapshot of baseline glucose.",
+            "whyItMatters": "Persistently high fasting glucose is an early sign of insulin resistance and metabolic strain.",
+            "whatYoursSuggests": "Comfortably normal — no fasting-glucose red flag."
+          },
+          "labNote": null
+        },
+        {
+          "id": "hba1c",
+          "name": "Hemoglobin A1c",
+          "group": "Metabolic & Blood Sugar",
+          "value": 5.3,
+          "unit": "%",
+          "refLow": 4.0,
+          "refHigh": 5.6,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A 3-month average of blood sugar, read from sugar stuck to red blood cells.",
+            "whyItMatters": "It smooths out daily noise and is the standard gauge for diabetes risk. 5.7–6.4% is pre-diabetes.",
+            "whatYoursSuggests": "Well within the healthy band — your 3-month average blood sugar looks good."
+          },
+          "labNote": null
+        },
+        {
+          "id": "fasting-insulin",
+          "name": "Fasting Insulin",
+          "group": "Metabolic & Blood Sugar",
+          "value": 45,
+          "unit": "pmol/L",
+          "refLow": 18,
+          "refHigh": 173,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "How much insulin your pancreas is producing at rest.",
+            "whyItMatters": "Insulin can run high years before glucose does — a low-normal value suggests your cells respond to insulin efficiently.",
+            "whatYoursSuggests": "In the lower-normal zone, which generally points to good insulin sensitivity."
+          },
+          "labNote": null
+        },
+        {
+          "id": "total-cholesterol",
+          "name": "Total Cholesterol",
+          "group": "Lipids & Cardiovascular",
+          "value": 4.6,
+          "unit": "mmol/L",
+          "refLow": null,
+          "refHigh": 5.2,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The sum of cholesterol carried in your blood.",
+            "whyItMatters": "A blunt number on its own — the breakdown (LDL, HDL, triglycerides) matters more — but a useful headline.",
+            "whatYoursSuggests": "Below the cutoff; the detailed lipid breakdown below tells the fuller story."
+          },
+          "labNote": null
+        },
+        {
+          "id": "ldl-c",
+          "name": "LDL Cholesterol",
+          "group": "Lipids & Cardiovascular",
+          "value": 2.5,
+          "unit": "mmol/L",
+          "refLow": null,
+          "refHigh": 3.4,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The 'delivery' cholesterol that can build up in artery walls when too high.",
+            "whyItMatters": "It's the primary lipid target for cardiovascular risk.",
+            "whatYoursSuggests": "Below the general threshold — a favourable number."
+          },
+          "labNote": null
+        },
+        {
+          "id": "hdl-c",
+          "name": "HDL Cholesterol",
+          "group": "Lipids & Cardiovascular",
+          "value": 1.5,
+          "unit": "mmol/L",
+          "refLow": 1.0,
+          "refHigh": null,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The 'cleanup' cholesterol that carries excess back to the liver.",
+            "whyItMatters": "Higher is generally protective — this is one where you want to be above the floor.",
+            "whatYoursSuggests": "Healthily above the minimum — a protective level."
+          },
+          "labNote": null
+        },
+        {
+          "id": "triglycerides",
+          "name": "Triglycerides",
+          "group": "Lipids & Cardiovascular",
+          "value": 0.9,
+          "unit": "mmol/L",
+          "refLow": null,
+          "refHigh": 1.7,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "Fat circulating in the blood, strongly tied to diet and carbohydrate load.",
+            "whyItMatters": "High triglycerides track with insulin resistance and cardiovascular risk.",
+            "whatYoursSuggests": "Low and healthy — consistent with the good metabolic markers."
+          },
+          "labNote": null
+        },
+        {
+          "id": "apob",
+          "name": "Apolipoprotein B (ApoB)",
+          "group": "Lipids & Cardiovascular",
+          "value": 0.85,
+          "unit": "g/L",
+          "refLow": null,
+          "refHigh": 1.2,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A direct count of the artery-clogging particles, often more precise than LDL alone.",
+            "whyItMatters": "Each harmful particle carries one ApoB, so it captures true particle burden.",
+            "whatYoursSuggests": "In a favourable range — the particle count backs up the good LDL number."
+          },
+          "labNote": null
+        },
+        {
+          "id": "dhea-s",
+          "name": "DHEA-Sulfate",
+          "group": "Hormones",
+          "value": 8.5,
+          "unit": "umol/L",
+          "refLow": 4.3,
+          "refHigh": 12.2,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "An adrenal hormone that's a building block for other hormones and a rough adrenal-reserve gauge.",
+            "whyItMatters": "It tends to fall with chronic stress and age; healthy levels support resilience and recovery.",
+            "whatYoursSuggests": "Mid-range — adrenal reserve looks solid. Worth trending alongside reverse T3 and cortisol."
+          },
+          "labNote": null
+        },
+        {
+          "id": "testosterone",
+          "name": "Testosterone (Total)",
+          "group": "Hormones",
+          "value": 18,
+          "unit": "nmol/L",
+          "refLow": 8.4,
+          "refHigh": 28.7,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The primary androgen, affecting energy, muscle, libido and mood.",
+            "whyItMatters": "Low levels can mean fatigue, low drive and poor recovery.",
+            "whatYoursSuggests": "Comfortably mid-range — no concern here."
+          },
+          "labNote": null
+        },
+        {
+          "id": "cortisol-am",
+          "name": "Cortisol (AM)",
+          "group": "Hormones",
+          "value": 380,
+          "unit": "nmol/L",
+          "refLow": 170,
+          "refHigh": 500,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "Your main stress hormone, measured in the morning when it should naturally peak.",
+            "whyItMatters": "A healthy morning peak drives the wake-up and energy curve; chronically high or flat patterns signal stress-axis strain.",
+            "whatYoursSuggests": "A normal morning level. The PM Cortisol Manager supplement is about smoothing the evening curve, not fixing a high number."
+          },
+          "labNote": null
+        },
+        {
+          "id": "alt",
+          "name": "Alanine Aminotransferase (ALT)",
+          "group": "Liver & Biliary",
+          "value": 28,
+          "unit": "U/L",
+          "refLow": null,
+          "refHigh": 50,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A liver enzyme that leaks into blood when liver cells are stressed.",
+            "whyItMatters": "It's a sensitive flag for liver inflammation or fatty liver.",
+            "whatYoursSuggests": "Normal — no sign of liver-cell stress."
+          },
+          "labNote": null
+        },
+        {
+          "id": "ast",
+          "name": "Aspartate Aminotransferase (AST)",
+          "group": "Liver & Biliary",
+          "value": 24,
+          "unit": "U/L",
+          "refLow": null,
+          "refHigh": 40,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A second liver/muscle enzyme, read alongside ALT.",
+            "whyItMatters": "The AST:ALT ratio helps distinguish liver from muscle sources.",
+            "whatYoursSuggests": "Normal and in line with ALT — a healthy liver picture."
+          },
+          "labNote": null
+        },
+        {
+          "id": "alp",
+          "name": "Alkaline Phosphatase (ALP)",
+          "group": "Liver & Biliary",
+          "value": 72,
+          "unit": "U/L",
+          "refLow": 40,
+          "refHigh": 129,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "An enzyme from liver, bile ducts and bone.",
+            "whyItMatters": "Helps flag bile-flow issues or bone turnover when out of range.",
+            "whatYoursSuggests": "Mid-range and unremarkable."
+          },
+          "labNote": null
+        },
+        {
+          "id": "ggt",
+          "name": "Gamma-Glutamyl Transferase (GGT)",
+          "group": "Liver & Biliary",
+          "value": 22,
+          "unit": "U/L",
+          "refLow": null,
+          "refHigh": 60,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A liver enzyme sensitive to alcohol and bile-flow stress.",
+            "whyItMatters": "A useful cross-check on the other liver enzymes and oxidative load.",
+            "whatYoursSuggests": "Low-normal — no biliary or alcohol-related stress signal."
+          },
+          "labNote": null
+        },
+        {
+          "id": "total-bilirubin",
+          "name": "Total Bilirubin",
+          "group": "Liver & Biliary",
+          "value": 28,
+          "unit": "umol/L",
+          "refLow": null,
+          "refHigh": 21,
+          "status": "BENIGN_FLAG",
+          "severityRank": 5,
+          "explainer": {
+            "whatItIs": "A yellow pigment from the normal recycling of old red blood cells, cleared by the liver.",
+            "whyItMatters": "Mildly high bilirubin with otherwise normal liver enzymes is most often Gilbert's syndrome — a common, harmless inherited quirk in how bilirubin is processed.",
+            "whatYoursSuggests": "Slightly above the cutoff but flagged benign: all other liver markers are normal, fitting the Gilbert's pattern. Not a cause for concern — confirm the interpretation with your doctor."
+          },
+          "labNote": "Isolated elevation of unconjugated bilirubin with normal hepatic enzymes is consistent with Gilbert's syndrome."
+        },
+        {
+          "id": "albumin",
+          "name": "Albumin",
+          "group": "Liver & Biliary",
+          "value": 45,
+          "unit": "g/L",
+          "refLow": 35,
+          "refHigh": 50,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The main protein the liver makes, a marker of liver synthesis and nutrition.",
+            "whyItMatters": "Low albumin can reflect poor liver function, inflammation or malnutrition.",
+            "whatYoursSuggests": "Healthy — good liver synthetic function and protein status."
+          },
+          "labNote": null
+        },
+        {
+          "id": "creatinine",
+          "name": "Creatinine",
+          "group": "Kidney & Electrolytes",
+          "value": 88,
+          "unit": "umol/L",
+          "refLow": 62,
+          "refHigh": 106,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A muscle-breakdown waste product the kidneys filter out.",
+            "whyItMatters": "Rising creatinine signals the kidneys aren't clearing waste as well.",
+            "whatYoursSuggests": "Normal — consistent with healthy kidney filtering."
+          },
+          "labNote": null
+        },
+        {
+          "id": "egfr",
+          "name": "Estimated GFR (eGFR)",
+          "group": "Kidney & Electrolytes",
+          "value": 95,
+          "unit": "mL/min/1.73m²",
+          "refLow": 60,
+          "refHigh": null,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A calculated estimate of how fast your kidneys filter blood.",
+            "whyItMatters": "The headline number for overall kidney health; below 60 sustained warrants attention.",
+            "whatYoursSuggests": "Well above the floor — kidney filtration looks strong."
+          },
+          "labNote": null
+        },
+        {
+          "id": "sodium",
+          "name": "Sodium",
+          "group": "Kidney & Electrolytes",
+          "value": 140,
+          "unit": "mmol/L",
+          "refLow": 135,
+          "refHigh": 145,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The main electrolyte governing fluid balance.",
+            "whyItMatters": "Tightly regulated; deviations can affect hydration, blood pressure and nerves.",
+            "whatYoursSuggests": "Dead centre — well-regulated fluid balance."
+          },
+          "labNote": null
+        },
+        {
+          "id": "potassium",
+          "name": "Potassium",
+          "group": "Kidney & Electrolytes",
+          "value": 4.3,
+          "unit": "mmol/L",
+          "refLow": 3.5,
+          "refHigh": 5.1,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "An electrolyte critical for heart rhythm and muscle function.",
+            "whyItMatters": "Both high and low levels can affect the heartbeat, so it's kept in a tight window.",
+            "whatYoursSuggests": "Comfortably mid-range."
+          },
+          "labNote": null
+        },
+        {
+          "id": "ferritin",
+          "name": "Ferritin",
+          "group": "Iron & Blood",
+          "value": 110,
+          "unit": "ug/L",
+          "refLow": 30,
+          "refHigh": 400,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "Your stored-iron gauge — the body's iron savings account.",
+            "whyItMatters": "Low ferritin means depleted iron stores (fatigue, hair loss); very high can signal inflammation or overload.",
+            "whatYoursSuggests": "Healthy stores — no iron-deficiency signal."
+          },
+          "labNote": null
+        },
+        {
+          "id": "iron",
+          "name": "Serum Iron",
+          "group": "Iron & Blood",
+          "value": 18,
+          "unit": "umol/L",
+          "refLow": 10,
+          "refHigh": 30,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "Iron currently circulating in the blood (distinct from stored iron).",
+            "whyItMatters": "A point-in-time number that's read together with ferritin and TIBC.",
+            "whatYoursSuggests": "Mid-range and consistent with the healthy ferritin."
+          },
+          "labNote": null
+        },
+        {
+          "id": "tibc",
+          "name": "Total Iron Binding Capacity (TIBC)",
+          "group": "Iron & Blood",
+          "value": 58,
+          "unit": "umol/L",
+          "refLow": 45,
+          "refHigh": 72,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "How much capacity your blood has to carry iron — rises when iron is scarce.",
+            "whyItMatters": "Helps interpret whether low iron is a supply or a transport issue.",
+            "whatYoursSuggests": "Normal — no sign the body is scrambling for iron."
+          },
+          "labNote": null
+        },
+        {
+          "id": "transferrin-sat",
+          "name": "Transferrin Saturation",
+          "group": "Iron & Blood",
+          "value": 31,
+          "unit": "%",
+          "refLow": 20,
+          "refHigh": 50,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The percentage of your iron-transport capacity actually in use.",
+            "whyItMatters": "Low suggests deficiency; high can hint at iron overload.",
+            "whatYoursSuggests": "Right in the sweet spot — balanced iron transport."
+          },
+          "labNote": null
+        },
+        {
+          "id": "vitamin-d-25oh",
+          "name": "Vitamin D (25-OH)",
+          "group": "Vitamins & Minerals",
+          "value": 58,
+          "unit": "nmol/L",
+          "refLow": 75,
+          "refHigh": 250,
+          "status": "LOW",
+          "severityRank": 60,
+          "explainer": {
+            "whatItIs": "The storage form of vitamin D, the standard measure of your vitamin D status.",
+            "whyItMatters": "Beyond bones, vitamin D modulates the immune system — directly relevant to the autoimmune thyroid picture. Low levels are extremely common.",
+            "whatYoursSuggests": "Below the sufficiency threshold. This is the most actionable flag here, and the Vitamin D & K2 supplement on the protocol targets it. Re-test after a few months of consistent dosing to confirm it's climbing."
+          },
+          "labNote": "Levels below 75 nmol/L are considered insufficient by many guidelines. Supplementation and recheck may be appropriate."
+        },
+        {
+          "id": "vitamin-b12",
+          "name": "Vitamin B12",
+          "group": "Vitamins & Minerals",
+          "value": 410,
+          "unit": "pmol/L",
+          "refLow": 145,
+          "refHigh": 600,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A vitamin essential for nerves, energy and red blood cell production.",
+            "whyItMatters": "Low B12 causes fatigue, brain fog and nerve symptoms.",
+            "whatYoursSuggests": "Comfortably in range; the B12 supplement keeps it topped up."
+          },
+          "labNote": null
+        },
+        {
+          "id": "folate",
+          "name": "Folate (Serum)",
+          "group": "Vitamins & Minerals",
+          "value": 28,
+          "unit": "nmol/L",
+          "refLow": 10,
+          "refHigh": null,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A B-vitamin working with B12 on DNA, nerves and red blood cells.",
+            "whyItMatters": "Adequate folate supports methylation and energy pathways.",
+            "whatYoursSuggests": "Well above the floor — good folate status."
+          },
+          "labNote": null
+        },
+        {
+          "id": "magnesium",
+          "name": "Magnesium",
+          "group": "Vitamins & Minerals",
+          "value": 0.88,
+          "unit": "mmol/L",
+          "refLow": 0.66,
+          "refHigh": 1.07,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A mineral involved in hundreds of reactions — muscle, nerve, sleep and energy.",
+            "whyItMatters": "Serum magnesium is a rough gauge (most is inside cells), but low values are still meaningful.",
+            "whatYoursSuggests": "Mid-range; the PM magnesium supplement supports sleep and relaxation regardless."
+          },
+          "labNote": null
+        },
+        {
+          "id": "hs-crp",
+          "name": "High-Sensitivity CRP (hs-CRP)",
+          "group": "Inflammation",
+          "value": 0.8,
+          "unit": "mg/L",
+          "refLow": null,
+          "refHigh": 3.0,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A sensitive marker of low-grade, body-wide inflammation.",
+            "whyItMatters": "Chronic inflammation links to cardiovascular and metabolic risk; under 1.0 mg/L is considered low risk.",
+            "whatYoursSuggests": "Low — no signal of systemic inflammation, which is reassuring given the autoimmune antibodies."
+          },
+          "labNote": null
+        },
+        {
+          "id": "wbc",
+          "name": "White Blood Cell Count",
+          "group": "Complete Blood Count",
+          "value": 6.1,
+          "unit": "x10⁹/L",
+          "refLow": 4.0,
+          "refHigh": 11.0,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The count of immune cells in your blood.",
+            "whyItMatters": "High can mean infection or inflammation; low can mean immune suppression.",
+            "whatYoursSuggests": "Mid-range — a calm, healthy immune baseline."
+          },
+          "labNote": null
+        },
+        {
+          "id": "hemoglobin",
+          "name": "Hemoglobin",
+          "group": "Complete Blood Count",
+          "value": 152,
+          "unit": "g/L",
+          "refLow": 135,
+          "refHigh": 175,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The oxygen-carrying protein in red blood cells.",
+            "whyItMatters": "Low means anemia (fatigue, breathlessness); high can mean dehydration or other issues.",
+            "whatYoursSuggests": "Healthy — good oxygen-carrying capacity."
+          },
+          "labNote": null
+        },
+        {
+          "id": "hematocrit",
+          "name": "Hematocrit",
+          "group": "Complete Blood Count",
+          "value": 0.45,
+          "unit": "L/L",
+          "refLow": 0.40,
+          "refHigh": 0.50,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "The proportion of your blood made up of red cells.",
+            "whyItMatters": "Tracks with hemoglobin and hydration status.",
+            "whatYoursSuggests": "Mid-range and consistent with the healthy hemoglobin."
+          },
+          "labNote": null
+        },
+        {
+          "id": "platelets",
+          "name": "Platelets",
+          "group": "Complete Blood Count",
+          "value": 245,
+          "unit": "x10⁹/L",
+          "refLow": 150,
+          "refHigh": 400,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "Cell fragments that clot blood and stop bleeding.",
+            "whyItMatters": "Out-of-range counts affect bleeding and clotting risk.",
+            "whatYoursSuggests": "Normal — healthy clotting capacity."
+          },
+          "labNote": null
+        },
+        {
+          "id": "urine-ph",
+          "name": "Urine pH",
+          "group": "Urinalysis",
+          "value": 6.0,
+          "unit": "",
+          "refLow": 5.0,
+          "refHigh": 8.0,
+          "status": "IN_RANGE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "How acidic or alkaline your urine is.",
+            "whyItMatters": "Shifts with diet and hydration; extremes can relate to stone risk.",
+            "whatYoursSuggests": "Mildly acidic and entirely normal."
+          },
+          "labNote": null
+        },
+        {
+          "id": "urine-protein",
+          "name": "Urine Protein",
+          "group": "Urinalysis",
+          "value": "NEG",
+          "unit": "",
+          "refLow": null,
+          "refHigh": null,
+          "status": "QUALITATIVE",
+          "severityRank": 0,
+          "explainer": {
+            "whatItIs": "A check for protein leaking into the urine.",
+            "whyItMatters": "Protein in urine can be an early kidney-stress signal.",
+            "whatYoursSuggests": "Negative — no protein detected, consistent with the healthy kidney markers."
+          },
+          "labNote": null
+        }
+      ]
+    }
+  ]
+}
